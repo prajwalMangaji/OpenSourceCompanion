@@ -1,7 +1,15 @@
 // backend/middleware/auth.js
-// TEMP: Mock auth — replace with JWT later
+const jwt = require('jsonwebtoken');
+
 module.exports = (req, res, next) => {
-    // For demo: hardcode a user ID
-    req.user = { id: '675f8a1b2c3d4e5f6a7b8c9d' }; // fake MongoID
+  const token = req.header('Authorization')?.replace('Bearer ', '');
+  if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // contains { id: user._id }
     next();
+  } catch (e) {
+    res.status(401).json({ msg: 'Token is not valid' });
+  }
 };

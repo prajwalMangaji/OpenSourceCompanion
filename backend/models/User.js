@@ -1,17 +1,20 @@
 // backend/models/User.js
 const mongoose = require('mongoose');
 
-const skillSchema = new mongoose.Schema({
-    language: { type: String, required: true },
-    frameworks: [{ type: String }],
-    level: { type: String, enum: ['beginner', 'intermediate', 'advanced'], required: true }
-});
-
 const userSchema = new mongoose.Schema({
-    githubUsername: { type: String, required: true, unique: true },
-    skills: [skillSchema],
-    points: { type: Number, default: 0 },
-    badges: [{ type: String }]
-});
+  email: { type: String, unique: true, sparse: true, lowercase: true },
+  password: { type: String }, // null if only GitHub login
+  githubId: { type: String, unique: true, sparse: true },
+  githubUsername: { type: String },
+  githubAccessToken: { type: String }, // REQUIRED for PR verification
+  skills: [{
+    language: String,
+    frameworks: [String],
+    level: { type: String, enum: ['beginner', 'intermediate', 'advanced'] }
+  }],
+  points: { type: Number, default: 0 },
+  badges: [String],
+  leaderboardOptOut: { type: Boolean, default: false }
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
