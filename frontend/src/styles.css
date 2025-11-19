@@ -1,0 +1,58 @@
+/* Issue cards */
+.issue-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.08);
+}
+.tag-badge {
+  border-radius: 999px;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1050;
+}
+.custom-modal {
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+/* Guidance panel */
+.guidance-panel h6 {
+  font-weight: 600;
+}
+
+/* Badges */
+.badge-tile {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.badge-locked {
+  filter: grayscale(1);
+  opacity: 0.4;
+}
+.badge-icon {
+  line-height: 1;
+}
+
+/* Leaderboard medals */
+.medal-icon {
+  font-size: 1.25rem;
+}
+
+/* Responsive helpers */
+@media (max-width: 576px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
